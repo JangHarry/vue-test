@@ -1,4 +1,4 @@
-# vue-snugs
+# vue 연습용입니다.
 
 ## Project Information
 - node version : 14.15.4
