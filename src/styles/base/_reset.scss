@@ -1,0 +1,19 @@
+@charset "utf-8";
+/* 공통요소에 대한 내용 정의 */
+
+/* reset */
+body, p, div, h1, h2, h3, h4, h5, h6, ul, ol, dl, dt, dd, table, caption, form, fieldset, legend, input, a { margin: 0; padding: 0; text-decoration: none; }
+li { list-style-type: none; }
+fieldset, img { border: 0; }
+em { font-style: normal; }
+li img, li a, dd img, img, a img { vertical-align: top; }
+legend, caption { font-size: 0; width: 0; height: 0; line-height: 0; visibility: hidden; position: absolute; }
+body, input, textarea, select, button, table { color: #000; font-family: 'Noto Sans KR','Apple SD Gothic Neo',sans-serif,'Malgun Gothic','맑은 고딕',dotum,'돋움'; }
+iframe { display: block; }
+html { min-height: 100%; overflow-x: hidden; }
+body {margin:0 auto; min-height: 100%; overflow-x: hidden; font-size: 15px; -webkit-text-size-adjust: none; background-color:#fff; color:#212121;}
+select, input[type="text"] { height: 33px; border: 0; background: #f2f2f2; }
+textarea { height: 70px; border: 0; background: #f2f2f2; }
+table { border-spacing: 0; }
+table th, table td { padding: 0; }
+button {margin:0; padding:0; border:none; background:none;}
