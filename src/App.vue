@@ -6,17 +6,9 @@
 			<button @click="awesome = !awesome">클릭</button>
 		</div>
 		<div v-if="awesome">
-			<div>
-				<h3>공간 구조 (선택)</h3>
-				<ul>
-					<li>원룸</li>
-					<li>1.5룸</li>
-					<li>투룸</li>
-					<li>쓰리룸이상</li>
-				</ul>
-			</div>
-			<div>슬라이드 영역1</div>
-			<div>슬라이드 영역2</div>
+			<Place />
+			<Slider />
+			<br />
 			<h3>이름(선택)</h3>
 			<input type="text" placeholder="정규직" />
 			<h3>휴대폰번호 (선택)</h3>
@@ -30,7 +22,14 @@
 			<h3>이메일(선택)</h3>
 			<input type="text" placeholder="sarava@gmail.com" />
 			<h3>개인 정보 수집 및 이용 동의 (선택)</h3>
-			<input type="text" />
+			<input
+				disabled
+				type="text"
+				value="① 수집 및 이용목적 : 지역 수요 분석, 추가 설문
+② 수집정보 : 이름(성함), 휴대폰번호, 이메일
+③ 보유기간 : 제공동의일로부터 1년
+귀하께서는 개인정보 수집 및 이용에 대해 거부할 권리가 있습니다"
+			/>
 			<br />
 			<input type="checkbox" />
 			<span
@@ -43,12 +42,14 @@
 
 <script>
 import GetList from './components/GetList.vue';
+import Slider from './components/Slider.vue';
+import Place from './components/Place.vue';
 
 export default {
 	name: 'App',
 	data() {
 		return {
-			awesome: false,
+			awesome: true,
 			contact: null,
 		};
 	},
@@ -127,10 +128,11 @@ export default {
 
 	components: {
 		GetList,
+		Slider,
+		Place,
 	},
 	created() {
 		console.log('hi');
 	},
 };
 </script>
-<style></style>
