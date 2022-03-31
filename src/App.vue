@@ -1,31 +1,44 @@
 <template>
-	<div id="app">
+	<div class="" id="app">
 		<GetList />
-		<div>
-			<span>추가 정보를 등록해주시면 최적의 공간을 찾아서 연락드릴게요!</span>
-			<button @click="awesome = !awesome">클릭</button>
+		<div class="explain_const">
+			<div class="left">
+				<h3>추가 정보 선택</h3>
+				<br />
+				<p>
+					추가 정보를 등록해주시면<br />
+					최적의 공간을 찾아서 연락드릴게요! &#x1F609;
+				</p>
+			</div>
+			<button :class="{ active: isActive }" @click="activate()"></button>
 		</div>
-		<div v-if="awesome">
+		<div class="form_const" v-if="awesome">
 			<Place />
 			<Slider />
 			<br />
-			<h3>이름(선택)</h3>
-			<input type="text" placeholder="정규직" />
-			<h3>휴대폰번호 (선택)</h3>
+			<h3>이름 <span>(선택)</span></h3>
+			<input class="module_input_w" type="text" placeholder="정규직" />
+			<h3>휴대폰번호 <span>(선택)</span></h3>
 			<input
+				class="module_input_w"
 				type="text"
 				v-model="contact"
 				@keyup="getPhoneMask(contact)"
 				placeholder="010-1234-5678"
 				maxlength="13"
 			/>
-			<h3>이메일(선택)</h3>
-			<input type="text" placeholder="sarava@gmail.com" />
-			<h3>개인 정보 수집 및 이용 동의 (선택)</h3>
+			<h3>이메일 <span>(선택)</span></h3>
 			<input
-				disabled
+				class="module_input_w"
 				type="text"
-				value="① 수집 및 이용목적 : 지역 수요 분석, 추가 설문
+				placeholder="sarava@gmail.com"
+			/>
+			<h3>개인 정보 수집 및 이용 동의 <span>(선택)</span></h3>
+			<textarea
+				class="module_input_w"
+				readonly
+				style="resize: none; overflow: hidden"
+				placeholder="① 수집 및 이용목적 : 지역 수요 분석, 추가 설문 
 ② 수집정보 : 이름(성함), 휴대폰번호, 이메일
 ③ 보유기간 : 제공동의일로부터 1년
 귀하께서는 개인정보 수집 및 이용에 대해 거부할 권리가 있습니다"
@@ -49,8 +62,9 @@ export default {
 	name: 'App',
 	data() {
 		return {
-			awesome: true,
+			awesome: false,
 			contact: null,
+			isActive: false,
 		};
 	},
 
@@ -123,6 +137,10 @@ export default {
 			}
 
 			return res;
+		},
+		activate() {
+			this.isActive = !this.isActive;
+			this.awesome = !this.awesome;
 		},
 	},
 

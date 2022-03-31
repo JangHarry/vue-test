@@ -1,7 +1,7 @@
 <template>
 	<div id="place">
-		<h3>공간 구조 (선택)</h3>
-		<ul>
+		<h3>공간 구조 <span>(선택)</span></h3>
+		<ul class="module_tab_list">
 			<li
 				v-for="place in places"
 				:class="{ active: place.isActive }"

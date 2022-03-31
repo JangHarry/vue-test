@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div class="slider_const">
 		평수(선택)
 		{{ range1 }}
 		<vue-slider

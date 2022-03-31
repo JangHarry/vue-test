@@ -12,8 +12,102 @@ body, input, textarea, select, button, table { color: #000; font-family: 'Noto S
 iframe { display: block; }
 html { min-height: 100%; overflow-x: hidden; }
 body {margin:0 auto; min-height: 100%; overflow-x: hidden; font-size: 15px; -webkit-text-size-adjust: none; background-color:#fff; color:#212121;}
-select, input[type="text"] { height: 33px; border: 0; background: #f2f2f2; }
+select, input[type="text"] {border: 0;}
 textarea { height: 70px; border: 0; background: #f2f2f2; }
 table { border-spacing: 0; }
 table th, table td { padding: 0; }
 button {margin:0; padding:0; border:none; background:none;}
+select:disabled {
+  background: #d3d3d3;
+}
+textarea:read-only{
+  background: #fff;
+}
+
+/* 공통 */
+h3>span {
+    color: #d3d3d3
+}
+
+.module_tab_list { 
+ overflow: hidden;
+ display: flex;
+ margin : 15px 0 25px;   
+ justify-content: space-around;
+}
+
+
+.module_tab_list >  li{
+    background-color: #DCDCDC;    
+    margin-right: 15px;
+    padding: 10px 20px;     
+    border-radius: 20px;
+}
+
+.module_tab_list > li.active {
+    background-color: #9370DB;
+    color: white
+}
+
+.module_select_w {
+    width: 100%;
+    margin: 10px 0 10px;
+    padding: 10px;
+    border: 2px solid #f5f5f5;
+    border-radius: 5px;    
+}
+
+.module_input_w{
+    width: 100%;    
+    margin: 10px 0 30px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.form_const {
+    padding: 40px 30px;
+    background-color: #f5f5f5;
+}
+
+.explain_const{   
+   display: flex;    
+   border-top: 2px solid #f5f5f5;
+   border-bottom: 2px solid #f5f5f5;
+   padding : 15px 30px;
+}
+
+.explain_const >  button {
+     position: absolute;
+    top: 233px;
+    left: 84%;
+    width: 15px;
+    height: 15px;
+    margin-left: -12px;
+    border-left: 1px solid #111111;
+    border-bottom: 1px solid #030303;
+    transform: rotate(-45deg);
+    box-sizing: border-box;
+
+}
+
+.explain_const >  button.active {
+     position: absolute;
+    top: 245px;
+    left: 84%;
+    width: 15px;
+    height: 15px;
+    margin-left: -12px;
+    border-left: 1px solid #111111;
+    border-bottom: 1px solid #030303;
+    transform: rotate(135deg);
+    box-sizing: border-box;
+
+}
+
+.list_const {
+    padding: 0 30px;    
+}
+
+.slider_const{
+    margin: 15px 0 40px;
+}

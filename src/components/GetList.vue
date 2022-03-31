@@ -1,7 +1,12 @@
 <template>
-	<div id="content">
-		<div class="select">
-			<select id="first" v-model="first" @change="onChange($event)">
+	<div class="list_const">
+		<div>
+			<select
+				class="module_select_w"
+				id="first"
+				v-model="first"
+				@change="onChange($event)"
+			>
 				<option disabled value="">시/도</option>
 				<option
 					v-for="(item, index) in list"
@@ -13,9 +18,9 @@
 			</select>
 			<div class="select__arrow" />
 		</div>
-		<br />
-		<div class="select">
+		<div>
 			<select
+				class="module_select_w"
 				id="second"
 				:disabled="list1.length == 0"
 				v-model="second"
@@ -32,9 +37,8 @@
 			</select>
 			<div class="select__arrow" />
 		</div>
-		<br />
-		<div class="select">
-			<select id="three" v-model="three">
+		<div>
+			<select class="module_select_w" id="three" v-model="three">
 				<option disabled value="">읍/면/동</option>
 				<option
 					v-for="(item, index) in list2"
