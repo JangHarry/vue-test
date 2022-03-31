@@ -38,7 +38,12 @@
 			<div class="select__arrow" />
 		</div>
 		<div>
-			<select class="module_select_w" id="three" v-model="three">
+			<select
+				class="module_select_w"
+				id="three"
+				@change="onChange($event)"
+				v-model="three"
+			>
 				<option disabled value="">읍/면/동</option>
 				<option
 					v-for="(item, index) in list2"
@@ -66,6 +71,13 @@ export default {
 			three: '',
 		};
 	},
+	watch: {
+		three: function (val) {
+			if (val == '') {
+				this.onEmit(false);
+			}
+		},
+	},
 	methods: {
 		onChange(event) {
 			const cityNo = event.target.value;
@@ -75,9 +87,11 @@ export default {
 				this.getList1(cityNo);
 				this.second = '';
 				this.three = '';
-			} else {
+			} else if (selectId == 'second') {
 				this.getList2(cityNo);
 				this.three = '';
+			} else {
+				this.onEmit(true);
 			}
 		},
 
@@ -94,6 +108,14 @@ export default {
 		async getList2(cityNo) {
 			const response = await getList2(cityNo);
 			this.list2 = response.data.content;
+		},
+
+		onEmit(val) {
+			if (val) {
+				this.$emit('setList', [this.first, this.second, this.three]);
+			} else {
+				this.$emit('setList', []);
+			}
 		},
 	},
 	created() {

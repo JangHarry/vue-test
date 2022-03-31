@@ -1,6 +1,6 @@
 <template>
 	<div class="" id="app">
-		<GetList />
+		<GetList @setList="setList" />
 		<div class="explain_const">
 			<div class="left">
 				<h3>추가 정보 선택</h3>
@@ -17,18 +17,24 @@
 			<Slider />
 			<br />
 			<h3>이름 <span>(선택)</span></h3>
-			<input class="module_input_w" type="text" placeholder="정규직" />
-			<h3>휴대폰번호 <span>(선택)</span></h3>
 			<input
+				v-model="userName"
 				class="module_input_w"
 				type="text"
-				v-model="contact"
-				@keyup="getPhoneMask(contact)"
+				placeholder="정규직"
+			/>
+			<h3>휴대폰번호 <span>(선택)</span></h3>
+			<input
+				v-model="userPhone"
+				class="module_input_w"
+				type="text"
+				@keyup="getPhoneMask(userPhone)"
 				placeholder="010-1234-5678"
 				maxlength="13"
 			/>
 			<h3>이메일 <span>(선택)</span></h3>
 			<input
+				v-model="userEmail"
 				class="module_input_w"
 				type="text"
 				placeholder="sarava@gmail.com"
@@ -44,16 +50,23 @@
 귀하께서는 개인정보 수집 및 이용에 대해 거부할 권리가 있습니다"
 			/>
 			<br />
-			<input type="checkbox" />
+			<input v-model="ckBox" type="checkbox" />
 			<span
-				>(선택) 개인정보 수집 및 이용에 동의합니다. (동의한 경우에만 개인 정보가
-				수집됩니다.)</span
+				>(선택) 개인정보 수집 및 이용에 동의합니다.<br />
+				(동의한 경우에만 개인 정보가 수집됩니다.)</span
 			>
+		</div>
+		<div
+			@click="saveData()"
+			:class="[formActvie ? 'form-button active' : 'form-button']"
+		>
+			<h3>완료</h3>
 		</div>
 	</div>
 </template>
 
 <script>
+// import { postList } from '@/api/index';
 import GetList from './components/GetList.vue';
 import Slider from './components/Slider.vue';
 import Place from './components/Place.vue';
@@ -62,18 +75,36 @@ export default {
 	name: 'App',
 	data() {
 		return {
+			ckBox: '',
 			awesome: false,
-			contact: null,
 			isActive: false,
+			formActvie: false,
+			addressId: 0,
+			amountFrom: 0,
+			amountTo: 0,
+			areaFrom: 0,
+			areaTo: 0,
+			houseStructures: '',
+			userEmail: '',
+			userName: '',
+			userPhone: '',
 		};
 	},
 
 	methods: {
+		setList(value) {
+			if (value.length == 0) {
+				this.formActvie = false;
+			} else {
+				this.addressId = value[2];
+				this.formActvie = true;
+			}
+		},
 		getPhoneMask(val) {
 			let res = this.getMask(val);
-			this.contact = res;
+			this.userPhone = res;
 			//서버 전송 값에는 '-' 를 제외하고 숫자만 저장
-			this.model.contact = this.contact.replace(/[^0-9]/g, '');
+			this.model.userPhone = this.userPhone.replace(/[^0-9]/g, '');
 		},
 
 		getMask(phoneNumber) {
@@ -138,6 +169,53 @@ export default {
 
 			return res;
 		},
+
+		saveData() {
+			if (this.formActvie) {
+				this.setFormData(this.ckBox);
+			}
+		},
+
+		setFormData(val) {
+			let params = [];
+			if (val == '') {
+				console.log('개인정보 없음');
+				params = {
+					addressId: this.addressId,
+					agreePersonalInfo: false,
+					amountFrom: this.amountFrom,
+					amountTo: this.amountTo,
+					areaFrom: this.areaFrom,
+					areaTo: this.areaTo,
+					houseStructures: [4001, 4002],
+					userEmail: '',
+					userName: '',
+					userPhone: '',
+				};
+			} else {
+				console.log('개인정보 있음 ');
+				params = {
+					addressId: this.addressId,
+					agreePersonalInfo: true,
+					amountFrom: this.amountFrom,
+					amountTo: this.amountTo,
+					areaFrom: this.areaFrom,
+					areaTo: this.areaTo,
+					houseStructures: [4001, 4002],
+					userEmail: this.userEmail,
+					userName: this.userName,
+					userPhone: this.userPhone,
+				};
+			}
+			this.postList(params);
+		},
+
+		async postList(params) {
+			console.log(params);
+			//const response = await postList(params);
+			//console.log(response);
+		},
+
 		activate() {
 			this.isActive = !this.isActive;
 			this.awesome = !this.awesome;
@@ -148,9 +226,6 @@ export default {
 		GetList,
 		Slider,
 		Place,
-	},
-	created() {
-		console.log('hi');
 	},
 };
 </script>

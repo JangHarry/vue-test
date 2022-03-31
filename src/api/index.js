@@ -5,15 +5,10 @@ const instance = axios.create({
 });
 
 function getList() {
-	//const url = 'https://api-dev.saravayo.com/v1/common/address/city';
-	//return axios.get(url);
 	return instance.get('address/city');
 }
 
 function getList1(cityNo) {
-	//const url = 'https://api-dev.saravayo.com/v1/common/address/city';
-	//return axios.get(url);
-
 	return instance.get('address/children', {
 		params: {
 			level: '2',
@@ -23,8 +18,6 @@ function getList1(cityNo) {
 }
 
 function getList2(cityNo) {
-	//const url = 'https://api-dev.saravayo.com/v1/common/address/city';
-	//return axios.get(url);
 	return instance.get('address/children', {
 		params: {
 			level: '3',
@@ -33,4 +26,8 @@ function getList2(cityNo) {
 	});
 }
 
-export { getList, getList1, getList2 };
+function postList(params) {
+	return instance.post('location/request', params);
+}
+
+export { getList, getList1, getList2, postList };

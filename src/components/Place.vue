@@ -29,7 +29,6 @@ export default {
 	methods: {
 		activate(item) {
 			item.isActive = !item.isActive;
-			console.log(item);
 		},
 	},
 };
